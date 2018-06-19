@@ -41,6 +41,8 @@
 @define-color error_color #cc0000;
 
 /* widget colors */
+@define-color titlebar_bg_color @theme_bg_color;
+@define-color titlebar_fg_color @theme_fg_color;
 @define-color menubar_bg_color @theme_bg_color;
 @define-color menubar_fg_color @theme_fg_color;
 @define-color toolbar_bg_color @theme_bg_color;
@@ -55,16 +57,20 @@
 @define-color osd_fg @dark_fg_color;
 @define-color osd_bg alpha(@osd_base, 0.8);
 
+/* lightdm greeter colors */
+@define-color lightdm_bg_color @theme_base_color;
+@define-color lightdm_fg_color @theme_text_color;
+
 /* window manager colors */
-@define-color wm_bg #dedede;
-@define-color wm_border_focused #999999;
-@define-color wm_border_unfocused #aaaaaa;
-@define-color wm_border_focused #999999;
-@define-color wm_border_unfocused #aaaaaa;
-@define-color wm_icons_focused #555555;
+@define-color wm_bg @titlebar_bg_color;
+@define-color wm_border_focused mix(shade(@titlebar_bg_color, 0.7), @titlebar_fg_color, 0.21);
+@define-color wm_border_unfocused mix(shade(@titlebar_bg_color, 0.7), @titlebar_fg_color, 0.12);
+@define-color wm_title_focused mix(@titlebar_fg_color, @titlebar_bg_color, 0.1);
+@define-color wm_title_unfocused mix(@titlebar_fg_color, @titlebar_bg_color, 0.4);
+@define-color wm_icons_focused mix(@titlebar_fg_color, @titlebar_bg_color, 0.1);
 @define-color wm_icons_focused_prelight @selected_bg_color;
 @define-color wm_icons_focused_pressed shade(@selected_bg_color, 0.8);
-@define-color wm_icons_unfocused #888888;
+@define-color wm_icons_unfocused mix(@titlebar_fg_color, @titlebar_bg_color, 0.4);
 @define-color wm_icons_unfocused_prelight @selected_bg_color;
 @define-color wm_icons_unfocused_pressed shade(@selected_bg_color, 0.8);
 
@@ -73,3 +79,7 @@
 @import url("apps/gnome-applications.css");
 @import url("apps/granite-widgets.css");
 @import url("apps/unity.css");
+@import url("apps/xfce.css");
+@import url("apps/nemo.css");
+@import url("apps/synaptic.css");
+@import url("apps/lightdm-gtk-greeter.css");

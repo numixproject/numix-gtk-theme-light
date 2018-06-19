@@ -26,7 +26,7 @@ PanelApplet > GtkMenuBar.menubar,
 PanelApplet > GtkMenuBar.menubar.menuitem,
 PanelMenuBar.menubar,
 PanelMenuBar.menubar.menuitem {
-    -Panelpanel-icon-visible: true;
+    -PanelMenuBar-icon-visible: true;
 
     border-width: 0;
     background-color: @panel_bg_color;
@@ -86,7 +86,7 @@ WnckPager, WnckTasklist {
 
 .nautilus-desktop.nautilus-canvas-item {
     color: white;
-    text-shadow: 1 1 black;
+    text-shadow: 1px 1px black;
 }
 
 .nautilus-desktop.nautilus-canvas-item:active {
@@ -103,22 +103,24 @@ WnckPager, WnckTasklist {
     text-shadow: none;
 }
 
-NautilusWindow .sidebar .frame {
-    border-width: 1px 0 0 0;
+NautilusWindow .toolbar {
+    border-width: 0 0 1px;
     border-style: solid;
-    border-color: shade(@theme_bg_color, 0.8);
-    border-radius: 0;
+    border-color: shade(@toolbar_bg_color, 0.8);
+}
+
+NautilusWindow .sidebar .frame {
+    border-style: none;
 }
 
 NautilusWindow > GtkGrid > .pane-separator,
 NautilusWindow > GtkGrid > .pane-separator:hover {
-    border-width: 1px 1px 0 0;
+    border-width: 0 1px 0 0;
     border-style: solid;
     border-color: shade(@theme_bg_color, 0.8);
     background-color: @theme_bg_color;
 }
 
-NautilusView.frame,
 NautilusNotebook.notebook {
     border-right-width: 0;
     border-left-width: 0;
@@ -126,49 +128,31 @@ NautilusNotebook.notebook {
 }
 
 NautilusNotebook .frame {
-    border-width: 1px 0 0 0;
+    border-width: 0;
 }
 
-NautilusQueryEditor .primary-toolbar.toolbar {
-    padding: 4px;
-    border-top-width: 1px;
+NautilusQueryEditor .search-bar.toolbar {
+    border-top-width: 0;
     border-bottom-width: 0;
 }
 
-NautilusQueryEditor .primary-toolbar.toolbar .button {
-    padding: 0;
-}
-
 NautilusQueryEditor .toolbar {
-    padding: 4px 4px 3px 4px;
+    padding-top: 3px;
+    padding-bottom: 2px;
     border-width: 1px 0 0 0;
     border-style: solid;
     border-color: @toolbar_bg_color;
     background-color: shade(@toolbar_bg_color, 0.9);
 }
 
-NautilusNotebook.notebook NautilusQueryEditor .primary-toolbar.toolbar {
-    border-top-width: 0;
+NautilusQueryEditor .toolbar:nth-child(2) {
+    border-color: shade(@toolbar_bg_color, 0.8);
 }
 
-NautilusNotebook.notebook NautilusQueryEditor .toolbar:last-child,
-NautilusNotebook.notebook NautilusQueryEditor .primary-toolbar.toolbar:only-child {
+NautilusQueryEditor .toolbar:last-child,
+NautilusQueryEditor .search-bar.toolbar:only-child {
     border-bottom-width: 1px;
     border-bottom-color: shade(@toolbar_bg_color, 0.8);
-}
-
-.toolbar NautilusPathBar .button {
-    padding: 1px 5px;
-}
-
-/* inactive pane */
-.nautilus-inactive-pane .view {
-    background-color: shade(@theme_base_color, 0.9);
-}
-
-/* pane separator */
-NautilusWindow .pane-separator {
-    background-color: shade(@theme_bg_color, 0.8);
 }
 
 /******************
@@ -216,7 +200,7 @@ TerminalWindow .scrollbar.slider.vertical:active {
 /*********
  * gedit *
  *********/
-GeditWindow .pane-separator, 
+GeditWindow .pane-separator,
 GeditWindow .pane-separator:hover {
     border-width: 0 1px 1px 1px;
     border-style: solid;
@@ -225,57 +209,94 @@ GeditWindow .pane-separator:hover {
     color: shade(@theme_bg_color, 0.8);
 }
 
-GeditPanel.title GtkLabel {
-    padding: 4px 0;
+.gedit-document-panel {
+    background-color: @theme_bg_color;
+    color: mix(@theme_fg_color, @theme_bg_color, 0.1);
 }
 
-GeditPanel.vertical .title {
-    padding: 4px 0 4px 3px;
-    border-style: none;
+.gedit-document-panel-group-row,
+.gedit-document-panel-group-row:hover {
+    border-top: 1px solid shade(@theme_bg_color, 0.9);
+    background-color: @theme_bg_color;
 }
 
-GeditPanel .toolbar {
-    border-style: none;
+.gedit-document-panel-document-row:hover {
+    background-color: shade(@theme_bg_color, 1.05);
+}
+
+.gedit-document-panel-document-row:selected,
+.gedit-document-panel-document-row:selected:hover {
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+}
+
+.gedit-document-panel .list-row .button {
+    padding: 1px;
+    border-image: none;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px;
     background-color: transparent;
+    background-image: none;
+    color: transparent;
+    icon-shadow: none;
 }
 
-GeditDocumentsPanel .view {
-    background-color: @theme_base_color;
+.gedit-document-panel .prelight-row .button  {
+    border-color: alpha(black, 0.1);
+    color: mix(@theme_text_color, @theme_base_color, 0.5);
 }
 
-GeditPanel.vertical .notebook {
-    padding: 0;
-    border-width: 1px 0;
+.gedit-document-panel .list-row .button:hover,
+.gedit-document-panel .prelight-row .button:hover {
+    color: @theme_text_color;
+    border-color: alpha(black, 0.1);
 }
 
-GeditPanel.horizontal .notebook {
-    padding: 0;
-    border-width: 0 1px 1px 0;
+.gedit-document-panel .prelight-row .button:active {
+    color: @theme_text_color;
+    background-color: alpha(black, 0.08);
+    border-color: alpha(black, 0.2);
 }
 
-GeditWindow .notebook {
-    border-width: 1px 0;
+GeditStatusbar {
+    border-top: 1px solid shade(@theme_bg_color, 0.8);
 }
 
-GeditPanel .notebook tab,
-GeditWindow .notebook tab {
-    border-width: 0;
+GeditStatusbar GeditSmallButton,
+GeditStatusMenuButton {
+    text-shadow: none;
 }
 
-GeditStatusComboBox .button,
-GeditStatusComboBox .button:hover,
-GeditStatusComboBox .button:active,
-GeditStatusComboBox .button:active:hover {
-    padding: 1px 6px 2px 4px;
+GeditStatusbar GeditSmallButton.button,
+GeditStatusbar GeditSmallButton.button:hover,
+GeditStatusbar GeditSmallButton.button:active,
+GeditStatusbar GeditSmallButton.button:active:hover,
+GeditStatusMenuButton.button,
+GeditStatusMenuButton.button:hover,
+GeditStatusMenuButton.button:active,
+GeditStatusMenuButton.button:active:hover {
+    border-image: none;
     border-style: solid;
     border-width: 0 1px;
     border-radius: 0;
+    padding: 1px 6px 2px 4px;
 }
 
-GeditStatusComboBox .button:hover,
-GeditStatusComboBox .button:active,
-GeditStatusComboBox .button:active:hover {
+GeditStatusbar GeditSmallButton.button:hover,
+GeditStatusbar GeditSmallButton.button:active,
+GeditStatusbar GeditSmallButton.button:active:hover,
+GeditStatusMenuButton.button:hover,
+GeditStatusMenuButton.button:active,
+GeditStatusMenuButton.button:active:hover {
     border-color: shade(@theme_bg_color, 0.8);
+}
+
+GeditStatusbar GeditSmallButton.button:active,
+GeditStatusMenuButton.button:active {
+    background-color: shade(@theme_bg_color, 0.95);
+    color: @theme_fg_color;
 }
 
 GeditViewFrame .gedit-search-slider {
@@ -298,11 +319,17 @@ GeditViewFrame .gedit-search-slider .not-found:selected {
     color: @theme_selected_fg_color;
 }
 
-GeditFileBrowserWidget .primary-toolbar.toolbar  {
+GeditFileBrowserWidget .toolbar {
     padding: 2px;
     border-top: none;
     background-color: @theme_bg_color;
     background-image: none;
+}
+
+.gedit-search-entry-occurrences-tag {
+    margin: 2px;
+    padding: 2px;
+    color: mix(@theme_text_color, @theme_base_color, 0.5);
 }
 
 /***************
@@ -317,6 +344,7 @@ SushiFontWidget {
  *************/
 GucharmapChartable {
     background-color: @theme_base_color;
+    color: @theme_text_color;
 }
 
 GucharmapChartable:active,
@@ -326,9 +354,31 @@ GucharmapChartable:selected {
     color: @theme_selected_fg_color;
 }
 
-/***********************
- * gnome control center *
- ***********************/
-CcShellItemView.view {
-    background-color: @theme_bg_color;
+/*************
+ * evolution *
+ *************/
+EPreviewPane .entry {
+    background-color: @theme_base_color;
+    color: @theme_text_color;
+}
+
+/******************
+ * gnome calendar *
+ ******************/
+.calendar-view {
+    background-color: shade(@theme_base_color, 0.95);
+    color: @theme_text_color;
+}
+
+/*******************
+ * gnome-bluetooth *
+ *******************/
+GtkEntry.entry.pin-entry {
+	font: regular 50;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+GtkLabel.pin-label {
+	font: regular 50;
 }

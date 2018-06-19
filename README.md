@@ -1,4 +1,6 @@
-Numix is a modern flat theme with a combination of light and dark elements. It supports Gnome, Unity, XFCE and Openbox. Numix Light is the Light variant of Numix.
+Numix Light is a modern flat theme with a combination of light and dark elements. It supports Gnome, Unity, XFCE and Openbox.
+
+Numix Light is a part of the [Numix Project](http://numixproject.org).
 
 ### Manual installation
 
@@ -24,7 +26,7 @@ Please a drop a mail to team@numixproject.org if you have any problems or querie
 
 ### Requirements
 
-GTK+ 3.4
+GTK+ 3.6 or above
 
 Murrine theme engine
 
